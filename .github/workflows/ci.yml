@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - dev
 jobs:
   lint:
     
@@ -27,7 +28,7 @@ jobs:
       - name: Run Linter
         run: npm run lint
   test:
-    needs: lint
+    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -45,7 +46,7 @@ jobs:
       - name: Run Tests
         run: npm run test 
   build:
-    needs: test
+    needs: [lint,test]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -66,4 +67,9 @@ jobs:
         with:
           name: dist-files
           path: dist  
-
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy
+        run:  echo "deploying"

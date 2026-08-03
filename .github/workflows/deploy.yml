@@ -1,0 +1,12 @@
+name: deploying
+on:
+  push:
+    branches:
+      - test
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy
+        run:  echo "deploying"
+          
