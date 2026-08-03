@@ -5,6 +5,7 @@ on:
       - main
 jobs:
   lint:
+    
     runs-on: ubuntu-latest
     steps:
       # Step 1: Checkout the code
@@ -26,6 +27,7 @@ jobs:
       - name: Run Linter
         run: npm run lint
   test:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -43,6 +45,7 @@ jobs:
       - name: Run Tests
         run: npm run test 
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
